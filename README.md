@@ -1,44 +1,102 @@
-![Logo](https://bitbucket.org/gestora-clube-do-valor/teste-frontend/raw/628c2b4836d6de38acaeaba9143c653dcedf78db/logo.png)
+<img src="./images/logo.sample.png" alt="Logo of the project" align="right">
 
-# Teste Front-end
+# Teste FrontEnd &middot; [![Build Status](https://img.shields.io/travis/npm/npm/latest.svg?style=flat-square)](https://travis-ci.org/npm/npm) [![npm](https://img.shields.io/npm/v/npm.svg?style=flat-square)](https://www.npmjs.com/package/npm) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com) [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://github.com/your/your-project/blob/master/LICENSE)
+> Additional information or tag line
 
-Seja bem-vindo ao teste técnico de Front-end para o Clube do Valor! Este desafio foi projetado para avaliar a sua capacidade técnica como desenvolvedor Front-end, independentemente do seu nível de experiência. Estamos ansiosos para ver a sua implementação e avaliar o seu trabalho. Boa sorte!
+Project developed to know the level of knowledge, HTML, CSS AND JS (ES6)
 
-## Instruções:
+## Installing / Getting started
 
-1. Faça um fork deste repositório;
-2. Implemente o layout no [protótipo](https://www.figma.com/file/EqfsSYZNULPWkuQPx6KWmm/Teste-Frontend?type=design&node-id=2402%3A745&mode=dev&t=hY7Ip9WlZHEsUAda-1). 
-3. O conjunto mínimo de tecnologias a ser utilizado é HTML, CSS e JS (ES6);
-4. Crie um passo a passo de como rodar sua aplicação ([sugestão](https://github.com/elsewhencode/project-guidelines/blob/master/README.sample.md));
-5. Após terminar, crie um pull request e aguarde a avaliação;
+A quick introduction of the minimal setup you need to get a hello world up &
+running.
 
-### Critérios de avaliação:
+```shell
+npm install
+and 
+npm run dev
+```
+After installing the dependencies and running the project, you will see the home page, a dashboard with customer data
 
-Principais pontos que serão avaliados são:
-1. Qualidade de Código
-2. Projeto e estrutura
+## Developing
 
-## Requisitos:
+### Built With
+Main libraries, frameworks used in the project:
+ React, TailwindCss, MaterialUI, ApexCharts, date-fns
+<!-- 
+### Prerequisites
+What is needed to set up the dev environment. For instance, global dependencies or any other tools. include download links. -->
 
-- Implementar utilizando [Vue](https://vuejs.org/) ou [React](https://pt-br.reactjs.org/);
-- Exibir dados reais obtidos a partir da API `https://run.mocky.io/v3/d4a79840-93c0-4297-80bb-108c279377a3`;
-- Paginar movimentações na seção **Movimentações**;
-- Permitir a busca de movimentações por um cliente na seção **Movimentações**;
-- Gráficos funcionais utilizando a biblioteca de sua preferência.
+<!-- 
+### Setting up Dev
 
-### Extras
+Here's a brief intro about what a developer must do in order to start developing
+the project further:
 
-- Projetar arquitetura minimamente escalável;
-- Cobertura de testes utilizando o framework de sua preferência.
-- Estilizar usando [Tailwind CSS](https://tailwindcss.com/)
+```shell
+git clone https://github.com/your/your-project.git
+cd your-project/
+packagemanager install
+```
 
-## Notas:
+And state what happens step-by-step. If there is any virtual environment, local server or database feeder needed, explain here. -->
+<!-- 
+### Building
 
-- **! Importante !** O envio do Pull Request com todos os requisitos mencionados estará sujeito a avaliação para aprovação e encaminhamento para a próxima etapa.
-- Caso não tenha tido tempo suficiente ou tenha se esbarrado em alguma dificuldade, entregue o desafio mesmo incompleto e indique na descrição do pull request quais foram suas dificuldades.
-  Não se preocupe, avaliaremos ainda assim!
-- Lembre-se de fazer um _fork_ deste repositório! Apenas cloná-lo vai te impedir de criar o _pull request_ e dificultar a entrega;
+If your project needs some additional steps for the developer to build the
+project after some code changes, state them here. for example:
 
----
+```shell
+./configure
+make
+make install
+```
 
-**Boa sorte!**
+Here again you should state what actually happens when the code above gets
+executed.
+
+### Deploying / Publishing
+give instructions on how to build and release a new version
+In case there's some step you have to take that publishes this project to a
+server, this is the right time to state it.
+
+```shell
+packagemanager deploy your-project -s server.com -u username -p password
+```
+
+And again you'd need to tell what the previous code actually does.
+
+## Versioning
+
+We can maybe use [SemVer](http://semver.org/) for versioning. For the versions available, see the [link to tags on this repository](/tags).
+
+
+## Configuration
+
+Here you should write what are all of the configurations a user can enter when using the project.
+
+## Tests
+
+Describe and show how to run the tests with code examples.
+Explain what these tests test and why.
+
+```shell
+Give an example
+```
+
+## Style guide
+
+Explain your code style and show how to check it. -->
+
+## Api Reference
+
+[External API made available for testing](https://run.mocky.io/v3/d4a79840-93c0-4297-80bb-108c279377a3)
+
+<!-- 
+## Database
+
+Explaining what database (and version) has been used. Provide download links.
+Documents your database design and schemas, relations etc...  -->
+
+## Licensing
+
+State what the license is and how to find the text version of the license.
