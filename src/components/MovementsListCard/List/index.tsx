@@ -9,8 +9,7 @@ import TableRow from "@mui/material/TableRow";
 import { styled } from "@mui/material/styles";
 import { format } from "date-fns";
 import ptBR from "date-fns/locale/pt-BR";
-import { useEffect, useState } from "react";
-import { fetchApiData } from "../../../api/apiService";
+import { useState } from "react";
 import Badges from "../../Badges";
 import EmptyState from "../../EmptyState";
 
@@ -33,61 +32,51 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-const ListCard = ({ search }) => {
-  const [apiData, setApiData] = useState<Response | null>(null);
+const generateFakeData = () => {
+  const clients = [
+    "João Silva",
+    "Maria Oliveira",
+    "Carlos Santos",
+    "Ana Souza",
+  ];
+  const transactionTypes = ["Depósito", "Resgate"];
+
+  return clients.flatMap((client) => {
+    return Array.from({ length: 5 }, () => ({
+      clientName: client,
+      date: new Date(
+        2024,
+        Math.floor(Math.random() * 12),
+        Math.floor(Math.random() * 28) + 1
+      ),
+      value: (Math.random() * 1000).toFixed(2),
+      type: transactionTypes[
+        Math.floor(Math.random() * transactionTypes.length)
+      ],
+    }));
+  });
+};
+
+interface ListCardProps {
+  search: string;
+}
+
+const ListCard = ({ search }: ListCardProps) => {
   const [page, setPage] = useState(1);
   const itemsPerPage = 6;
+  const fakeData = generateFakeData();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await fetchApiData();
-        setApiData(data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  // Função para filtrar os itens com base na pesquisa e na página atual
   const getFilteredItems = () => {
-    const { clients_summary: clientsSummary = [] } = data || {};
-
-    // Filtra as transações com base no nome do cliente e na pesquisa
-    const filteredItems = clientsSummary.flatMap(
-      ({ name, latest_transactions }) =>
-        (latest_transactions || [])
-          .filter(
-            (transaction) =>
-              name.toLowerCase().includes(search?.toLowerCase()) ||
-              (transaction.clientName &&
-                transaction.clientName
-                  ?.toLowerCase()
-                  .includes(search?.toLowerCase()))
-          )
-          .map((transaction) => ({
-            clientName: name,
-            ...transaction,
-          }))
+    const filteredItems = fakeData.filter((transaction) =>
+      transaction.clientName.toLowerCase().includes(search?.toLowerCase())
     );
 
-    // Retorna os itens da página atual
     const startIndex = (page - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
     return filteredItems.slice(startIndex, endIndex);
   };
 
-  // Total de páginas
-  const { data } = apiData || {};
-  const { clients_summary: clientsSummary = [] } = data || {};
-  const totalTransactions = clientsSummary.reduce(
-    (total: any, { latest_transactions }: any) =>
-      total + (latest_transactions?.length || 0),
-    0
-  );
-  const totalPages = Math.ceil(totalTransactions / itemsPerPage);
+  const totalPages = Math.ceil(fakeData.length / itemsPerPage);
 
   const handleChangePage = (
     _event: React.MouseEvent<HTMLButtonElement> | null,
@@ -96,14 +85,13 @@ const ListCard = ({ search }) => {
     setPage(newPage);
   };
 
-  // Verifica se há itens filtrados para renderizar
   const filteredItems = getFilteredItems();
   const showEmptyState = filteredItems.length === 0;
 
   return (
     <div>
       {showEmptyState ? (
-        <div className=" mt-4 flex justify-center">
+        <div className="mt-4 flex justify-center">
           <EmptyState />
         </div>
       ) : (
@@ -130,7 +118,7 @@ const ListCard = ({ search }) => {
                       )}
                     </StyledTableCell>
                     <StyledTableCell>
-                      R$ {transaction.value.toLocaleString("pt-BR")}
+                      R$ {transaction.value.toLocaleString()}
                     </StyledTableCell>
                     <StyledTableCell>
                       <Badges

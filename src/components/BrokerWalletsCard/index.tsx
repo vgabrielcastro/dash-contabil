@@ -1,60 +1,60 @@
 import { Tooltip } from "@mui/material";
 import { useEffect, useState } from "react";
 import Chart from "react-apexcharts";
-import { fetchApiData } from "../../api/apiService";
 import TooltipIcon from "../../assets/tooltip-icon.svg";
 
 const BrokerWalletsCard = () => {
-  const [chartOptions, setChartOptions] = useState(null);
+  const [chartOptions, setChartOptions] = useState<{ options: any; series: any } | null>(null);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const apiResponse = await fetchApiData();
-        const { clients_summary: clientsSummary } = apiResponse.data;
-        
-        const categories = clientsSummary.map((item) => item.name);
-        const seriesData = clientsSummary.map((item) => ({
-          x: item.name,
-          y: [item.latest_transactions.reduce((acc, curr) => acc + curr.value, 0)],
-        }));
+    const generateFakeData = () => {
+      const fakeClients = [
+        { name: "XP Investimentos", value: 50000 },
+        { name: "BTG Pactual", value: 35000 },
+        { name: "Rico", value: 20000 },
+        { name: "Clear", value: 15000 },
+        { name: "Inter", value: 10000 },
+      ];
 
-        setChartOptions({
-          options: {
-            chart: {
-              type: "bar",
-              height: 350,
-              toolbar: {
-                show: false,
-              },
-            },
-            plotOptions: {
-              bar: {
-                horizontal: true,
-              },
-            },
-            dataLabels: {
-              enabled: false,
-              style: {
-                colors: ["#333"],
-              },
-            },
-            yaxis: {
-              categories: categories,
+      const categories = fakeClients.map((item) => item.name);
+      const seriesData = fakeClients.map((item) => ({
+        x: item.name,
+        y: [item.value],
+      }));
+
+      setChartOptions({
+        options: {
+          chart: {
+            type: "bar",
+            height: 350,
+            toolbar: {
+              show: false,
             },
           },
-          series: [
-            {
-              data: seriesData,
+          plotOptions: {
+            bar: {
+              horizontal: true,
             },
-          ],
-        });
-      } catch (error) {
-        console.error("Error fetching API data:", error);
-      }
+          },
+          dataLabels: {
+            enabled: false,
+            style: {
+              colors: ["#333"],
+            },
+          },
+          yaxis: {
+            categories: categories,
+          },
+        },
+        series: [
+          {
+            data: seriesData,
+          },
+        ],
+      });
     };
 
-    fetchData();
+    generateFakeData();
   }, []);
 
   return (

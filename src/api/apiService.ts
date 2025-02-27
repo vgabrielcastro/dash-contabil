@@ -30,7 +30,7 @@ interface ApiResponse {
 }
 
 async function fetchApiData(): Promise<ApiResponse> {
-  const response = await fetch('https://run.mocky.io/v3/d4a79840-93c0-4297-80bb-108c279377a3');
+  const response = await fetch('https://teste.com/api/data');
 
   if (!response.ok) {
     throw new Error('Failed to fetch data');

@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
-import { fetchApiData } from "../../api/apiService";
 import Badges from "../Badges";
 import InfoSkeleton from "./InfoSkeleton";
 
-// Define a interface para representar os dados do AdvisorSummary
 interface AdvisorSummary {
   client_count: number;
   total_equity: number;
@@ -19,7 +17,14 @@ const InfoCard = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await fetchApiData();
+        const data = {
+          advisor_summary: {
+            client_count: 120,
+            total_equity: 1500000,
+            average_equity: 12500,
+          },
+        };
+
         setAdvisorSummary(data.advisor_summary);
         setIsLoading(false);
       } catch (error) {
@@ -31,7 +36,6 @@ const InfoCard = () => {
     fetchData();
   }, []);
 
-  // Função para formatar os valores de moeda
   const formatCurrency = (value: number | null) => {
     if (value != null) {
       return `R$ ${value.toLocaleString("pt-BR")}`;
