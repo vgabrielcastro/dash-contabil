@@ -2,83 +2,58 @@ import { CircularProgress, Tooltip } from "@mui/material";
 import { format } from "date-fns";
 import { useEffect, useState } from "react";
 import Chart from "react-apexcharts";
-import { fetchApiData } from "../../api/apiService";
 import TooltipIcon from "../../assets/tooltip-icon.svg";
 
 const EvoluationCard = () => {
   const [chartData, setChartData] = useState(null);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        // Chame a função para buscar os dados da API
-        const apiResponse = await fetchApiData();
+    // Dados fictícios para testes
+    const mockData = [
+      { date: "2024-01-01", value: 200000 },
+      { date: "2024-01-15", value: 210000 },
+      { date: "2024-02-01", value: 230000 },
+      { date: "2024-02-15", value: 250000 },
+      { date: "2024-03-01", value: 280000 },
+    ];
 
-        // Extraia os dados relevantes para o gráfico
-        const equityHistory = apiResponse.data.advisor_summary.equity_history;
+    // Transformando os dados para o gráfico
+    const categories = mockData.map((item) =>
+      format(new Date(item.date), "dd MMM")
+    );
+    const seriesData = mockData.map((item) => item.value);
 
-        // Mapeie os dados para o formato esperado pelo gráfico
-        const seriesData = [];
-        const categories = [];
-        equityHistory.forEach((item) => {
-          // Formate as datas para exibir como "01 Apr"
-          const date = new Date(item.date);
-          categories.push(format(date, "dd MMM"));
-          seriesData.push(item.value);
-        });
-
-        // Atualize o estado do chartData com os dados relevantes
-        setChartData({
-          options: {
-            dataLabels: {
-              enabled: false,
-            },
-            chart: {
-              id: "evoluation-chart",
-              type: "area",
-              toolbar: {
-                show: false,
-              },
-            },
-            xaxis: {
-              categories: categories,
-            },
-            yaxis: {
-              min: 0,
-              max: Math.max(...seriesData) + 50000, 
-              tickAmount: 6,
-              labels: {
-                formatter: (val) => {
-                  // Formata os números para exibir como "240 mi"
-                  return (
-                    (val / 1000).toLocaleString(undefined, {
-                      minimumFractionDigits: 0,
-                    }) + " mi"
-                  );
-                },
-              },
-            },
+    setChartData({
+      options: {
+        dataLabels: { enabled: false },
+        chart: {
+          id: "evoluation-chart",
+          type: "area",
+          toolbar: { show: false },
+        },
+        xaxis: { categories },
+        yaxis: {
+          min: 0,
+          max: Math.max(...seriesData) + 50000,
+          tickAmount: 6,
+          labels: {
+            formatter: (val) => `${(val / 1000).toLocaleString()} mi`,
           },
-          series: [
-            {
-              name: "Evolução de patrimônio sob custódia",
-              data: seriesData,
-            },
-          ],
-        });
-      } catch (error) {
-        console.error("Erro ao buscar dados da API:", error);
-      }
-    };
-
-    fetchData();
+        },
+      },
+      series: [
+        { name: "Evolução de patrimônio sob custódia", data: seriesData },
+      ],
+    });
   }, []);
 
   if (!chartData) {
-    return <div className="m-3 rounded-xl pl-6 h-32 flex items-center gap-5 bg-white">
-      <CircularProgress />
-      Loading...
-      </div>;
+    return (
+      <div className="m-3 rounded-xl pl-6 h-32 flex items-center gap-5 bg-white">
+        <CircularProgress />
+        Loading...
+      </div>
+    );
   }
 
   return (
@@ -88,7 +63,7 @@ const EvoluationCard = () => {
         <Tooltip title="Tooltip" placement="top-start">
           <img
             src={TooltipIcon}
-            alt="arrow up"
+            alt="tooltip"
             className="w-4 inline-block ml-2"
           />
         </Tooltip>
