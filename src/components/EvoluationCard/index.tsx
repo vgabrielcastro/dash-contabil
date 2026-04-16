@@ -3,12 +3,12 @@ import { format } from "date-fns";
 import { useEffect, useState } from "react";
 import Chart from "react-apexcharts";
 import TooltipIcon from "../../assets/tooltip-icon.svg";
+import CardShell from "../CardShell";
 
 const EvoluationCard = () => {
   const [chartData, setChartData] = useState(null);
 
   useEffect(() => {
-    // Dados fictícios para testes
     const mockData = [
       { date: "2024-01-01", value: 200000 },
       { date: "2024-01-15", value: 210000 },
@@ -17,7 +17,6 @@ const EvoluationCard = () => {
       { date: "2024-03-01", value: 280000 },
     ];
 
-    // Transformando os dados para o gráfico
     const categories = mockData.map((item) =>
       format(new Date(item.date), "dd MMM")
     );
@@ -30,53 +29,84 @@ const EvoluationCard = () => {
           id: "evoluation-chart",
           type: "area",
           toolbar: { show: false },
+          zoom: { enabled: false },
         },
-        xaxis: { categories },
+        stroke: {
+          curve: "smooth",
+          width: 3,
+        },
+        fill: {
+          type: "gradient",
+          gradient: {
+            shadeIntensity: 1,
+            opacityFrom: 0.45,
+            opacityTo: 0.1,
+            stops: [0, 90, 100],
+          },
+        },
+        xaxis: {
+          categories,
+          labels: {
+            style: {
+              colors: "#475569",
+            },
+          },
+        },
         yaxis: {
           min: 0,
           max: Math.max(...seriesData) + 50000,
-          tickAmount: 6,
+          tickAmount: 5,
           labels: {
-            formatter: (val) => `${(val / 1000).toLocaleString()} mi`,
+            formatter: (val) => `R$ ${Math.round(val / 1000).toLocaleString()}k`,
+            style: {
+              colors: "#475569",
+            },
           },
+        },
+        grid: {
+          borderColor: "#e2e8f0",
+          strokeDashArray: 4,
+        },
+        tooltip: {
+          theme: "light",
         },
       },
       series: [
-        { name: "Evolução de patrimônio sob custódia", data: seriesData },
+        { name: "Evolução de patrimônio", data: seriesData },
       ],
     });
   }, []);
 
   if (!chartData) {
     return (
-      <div className="m-3 rounded-xl pl-6 h-32 flex items-center gap-5 bg-white">
-        <CircularProgress />
-        Loading...
+      <div className="m-3 rounded-3xl bg-white/95 p-6 shadow-sm">
+        <div className="flex items-center gap-4">
+          <CircularProgress size={28} />
+          <span className="text-sm text-slate-600">Carregando evolução...</span>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="mt-6 p-4 bg-white rounded-lg shadow-md">
-      <h2 className="text-lg font-semibold mb-4">
-        Evolução de Patrimônio Sob Custódia
-        <Tooltip title="Tooltip" placement="top-start">
-          <img
-            src={TooltipIcon}
-            alt="tooltip"
-            className="w-4 inline-block ml-2"
-          />
+    <CardShell
+      title="Evolução de Patrimônio Sob Custódia"
+      subtitle="Visão histórica do desempenho"
+      action={
+        <Tooltip title="Dados demonstrativos" placement="top-start">
+          <img src={TooltipIcon} alt="tooltip" className="w-4" />
         </Tooltip>
-      </h2>
-      <div className="w-full">
+      }
+    >
+      <div className="mt-2">
         <Chart
           options={chartData.options}
           series={chartData.series}
           type="area"
-          height={350}
+          height={340}
         />
       </div>
-    </div>
+    </CardShell>
   );
 };
 

@@ -16,16 +16,27 @@ import EmptyState from "../../EmptyState";
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.action.hover,
-    color: theme.palette.common.black,
+    color: theme.palette.text.primary,
+    fontWeight: 700,
+    fontSize: 14,
   },
   [`&.${tableCellClasses.body}`]: {
     fontSize: 14,
+    color: theme.palette.text.secondary,
   },
 }));
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  backgroundColor: theme.palette.background.paper,
+  transition: "background-color 0.2s ease",
   "&:nth-of-type(odd)": {
     backgroundColor: theme.palette.action.hover,
+  },
+  "&:hover": {
+    backgroundColor: theme.palette.action.selected,
+  },
+  "& td, & th": {
+    borderBottom: `1px solid ${theme.palette.divider}`,
   },
   "&:last-child td, &:last-child th": {
     border: 0,
@@ -76,7 +87,7 @@ const ListCard = ({ search }: ListCardProps) => {
     return filteredItems.slice(startIndex, endIndex);
   };
 
-  const totalPages = Math.ceil(fakeData.length / itemsPerPage);
+  const totalPages = Math.max(1, Math.ceil(fakeData.length / itemsPerPage));
 
   const handleChangePage = (
     _event: React.MouseEvent<HTMLButtonElement> | null,
@@ -96,7 +107,14 @@ const ListCard = ({ search }: ListCardProps) => {
         </div>
       ) : (
         <>
-          <TableContainer component={Paper}>
+          <TableContainer
+            component={Paper}
+            sx={{
+              borderRadius: 4,
+              boxShadow: "0 20px 50px rgba(15,23,42,0.08)",
+              overflow: "hidden",
+            }}
+          >
             <Table sx={{ minWidth: 700 }} aria-label="customized table">
               <TableHead>
                 <TableRow>
@@ -118,7 +136,7 @@ const ListCard = ({ search }: ListCardProps) => {
                       )}
                     </StyledTableCell>
                     <StyledTableCell>
-                      R$ {transaction.value.toLocaleString()}
+                      R$ {Number(transaction.value).toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                     </StyledTableCell>
                     <StyledTableCell>
                       <Badges
@@ -138,6 +156,8 @@ const ListCard = ({ search }: ListCardProps) => {
               count={totalPages}
               page={page}
               onChange={handleChangePage}
+              color="primary"
+              shape="rounded"
             />
           </div>
         </>

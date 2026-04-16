@@ -45,40 +45,63 @@ const InfoCard = () => {
 
   if (isLoading) {
     return (
-      <div className="mb-12">
-        <InfoSkeleton />;
+      <div className="mb-8">
+        <InfoSkeleton />
       </div>
     );
   }
 
   return (
-    <div className="flex w-full h-28 gap-12">
+    <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
       {advisorSummary && (
         <>
-          <div className="flex-1 bg-white p-4 rounded-2xl shadow-md">
-            <h2 className="text-xl font-semibold mb-4">Clientes</h2>
-            <div className="flex justify-between items-center">
-              <p className="mr-2">{advisorSummary.client_count}</p>
+          <div className="rounded-3xl border border-slate-200/80 bg-slate-50 p-5 shadow-sm transition duration-300 hover:-translate-y-0.5 hover:shadow-lg">
+            <span className="inline-flex rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-emerald-700">
+              Clientes
+            </span>
+            <div className="mt-5 flex items-end justify-between gap-4">
+              <div>
+                <p className="text-4xl font-semibold text-slate-900">
+                  {advisorSummary.client_count}
+                </p>
+                <p className="mt-2 text-sm text-slate-500">
+                  Total de clientes ativos
+                </p>
+              </div>
               <Badges text="+10%" color="secondary" />
             </div>
           </div>
-          <div className="flex-1 bg-white p-4 rounded-2xl shadow-md">
-            <h2 className="text-xl font-semibold mb-4">
-              Patrimônio Sob Custódia
-            </h2>
-            <div className="flex justify-between items-center">
-              <p className="mr-2">
-                {formatCurrency(advisorSummary.total_equity)}
-              </p>
+
+          <div className="rounded-3xl border border-slate-200/80 bg-slate-50 p-5 shadow-sm transition duration-300 hover:-translate-y-0.5 hover:shadow-lg">
+            <span className="inline-flex rounded-full bg-sky-100 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-sky-700">
+              Patrimônio
+            </span>
+            <div className="mt-5 flex items-end justify-between gap-4">
+              <div>
+                <p className="text-4xl font-semibold text-slate-900">
+                  {formatCurrency(advisorSummary.total_equity)}
+                </p>
+                <p className="mt-2 text-sm text-slate-500">
+                  Abaixo do histórico do portfólio
+                </p>
+              </div>
               <Badges text="-5%" color="secondary" />
             </div>
           </div>
-          <div className="flex-1 bg-white p-4 rounded-2xl shadow-md">
-            <h2 className="text-xl font-semibold mb-4">Patrimônio Médio</h2>
-            <div className="flex justify-between items-center">
-              <p className="mr-2">
-                {formatCurrency(advisorSummary.average_equity)}
-              </p>
+
+          <div className="rounded-3xl border border-slate-200/80 bg-slate-50 p-5 shadow-sm transition duration-300 hover:-translate-y-0.5 hover:shadow-lg">
+            <span className="inline-flex rounded-full bg-amber-100 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-amber-700">
+              Médio
+            </span>
+            <div className="mt-5 flex items-end justify-between gap-4">
+              <div>
+                <p className="text-4xl font-semibold text-slate-900">
+                  {formatCurrency(advisorSummary.average_equity)}
+                </p>
+                <p className="mt-2 text-sm text-slate-500">
+                  Média por cliente
+                </p>
+              </div>
               <Badges text="-5%" color="error" />
             </div>
           </div>

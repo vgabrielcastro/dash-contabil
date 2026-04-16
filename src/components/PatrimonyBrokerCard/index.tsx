@@ -1,6 +1,7 @@
 import { Tooltip } from "@mui/material";
 import Chart from "react-apexcharts";
 import TooltipIcon from "../../assets/tooltip-icon.svg";
+import CardShell from "../CardShell";
 
 const PatrimonyBrokerCard = () => {
   const chartOptions = {
@@ -15,13 +16,11 @@ const PatrimonyBrokerCard = () => {
       plotOptions: {
         bar: {
           horizontal: true,
+          barHeight: "68%",
         },
       },
       dataLabels: {
         enabled: false,
-        style: {
-          colors: ["#333"],
-        },
       },
       yaxis: {
         tickAmount: 6,
@@ -29,18 +28,25 @@ const PatrimonyBrokerCard = () => {
           formatter: function (val) {
             return val;
           },
+          style: {
+            colors: "#475569",
+          },
         },
         axisTicks: {
           show: true,
-          color: "#777",
+          color: "#cbd5e1",
         },
         axisBorder: {
           show: true,
-          color: "#777",
+          color: "#cbd5e1",
         },
         min: 0,
         max: 50,
         tickPlacement: "between",
+      },
+      grid: {
+        borderColor: "#e2e8f0",
+        strokeDashArray: 4,
       },
     },
     series: [
@@ -65,24 +71,24 @@ const PatrimonyBrokerCard = () => {
   };
 
   return (
-    <div className="mt-3 p-4 bg-white rounded-lg shadow-md">
-      <h2 className="text-lg font-semibold mb-4 ">
-        Patrimônio por Corretora
-        <Tooltip title="Tooltip" placement="top-start">
-          <img
-            src={TooltipIcon}
-            alt="arrow up"
-            className="w-4 inline-block ml-2"
-          />
+    <CardShell
+      title="Patrimônio por Corretora"
+      subtitle="Contagem por corretora"
+      action={
+        <Tooltip title="Dados simulados" placement="top-start">
+          <img src={TooltipIcon} alt="tooltip" className="w-4" />
         </Tooltip>
-      </h2>
-      <Chart
-        options={chartOptions.options}
-        series={chartOptions.series}
-        type="bar"
-        height={350}
-      />
-    </div>
+      }
+    >
+      <div className="mt-2">
+        <Chart
+          options={chartOptions.options}
+          series={chartOptions.series}
+          type="bar"
+          height={340}
+        />
+      </div>
+    </CardShell>
   );
 };
 
