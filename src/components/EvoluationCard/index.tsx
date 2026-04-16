@@ -97,13 +97,14 @@ const EvoluationCard = () => {
           <img src={TooltipIcon} alt="tooltip" className="w-4" />
         </Tooltip>
       }
+      className="min-h-[460px]"
     >
-      <div className="mt-2">
+      <div className="mt-2 h-[380px] w-full">
         <Chart
           options={chartData.options}
           series={chartData.series}
           type="area"
-          height={340}
+          height={380}
         />
       </div>
     </CardShell>

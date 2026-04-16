@@ -1,5 +1,11 @@
 import { Badge, createTheme, ThemeProvider } from "@mui/material";
 
+interface BadgesNumberProps {
+  badgeContent: number;
+  color: "primary" | "secondary" | "error" | "warning";
+  className?: string;
+}
+
 const theme = createTheme({
   palette: {
     primary: {
@@ -21,7 +27,7 @@ const theme = createTheme({
   },
 });
 
-const BadgesNumber = ({ badgeContent, color, className }) => {
+const BadgesNumber = ({ badgeContent, color, className }: BadgesNumberProps) => {
   const textColor = theme.palette[color].contrastText;
 
   return (

@@ -95,14 +95,15 @@ const BrokerWalletsCard = () => {
           <img src={TooltipIcon} alt="tooltip" className="w-4" />
         </Tooltip>
       }
+      className="min-h-[420px]"
     >
       {chartOptions && (
-        <div className="mt-2">
+        <div className="mt-2 h-[360px] w-full">
           <Chart
             options={chartOptions.options}
             series={chartOptions.series}
             type="bar"
-            height={340}
+            height={360}
           />
         </div>
       )}

@@ -52,10 +52,10 @@ const InfoCard = () => {
   }
 
   return (
-    <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
+    <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
       {advisorSummary && (
         <>
-          <div className="rounded-3xl border border-slate-200/80 bg-slate-50 p-5 shadow-sm transition duration-300 hover:-translate-y-0.5 hover:shadow-lg">
+          <div className="rounded-3xl border border-slate-200/80 bg-slate-50 p-6 shadow-sm transition duration-300 hover:-translate-y-0.5 hover:shadow-lg">
             <span className="inline-flex rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-emerald-700">
               Clientes
             </span>
@@ -72,7 +72,7 @@ const InfoCard = () => {
             </div>
           </div>
 
-          <div className="rounded-3xl border border-slate-200/80 bg-slate-50 p-5 shadow-sm transition duration-300 hover:-translate-y-0.5 hover:shadow-lg">
+          <div className="rounded-3xl border border-slate-200/80 bg-slate-50 p-6 shadow-sm transition duration-300 hover:-translate-y-0.5 hover:shadow-lg">
             <span className="inline-flex rounded-full bg-sky-100 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-sky-700">
               Patrimônio
             </span>
@@ -89,7 +89,7 @@ const InfoCard = () => {
             </div>
           </div>
 
-          <div className="rounded-3xl border border-slate-200/80 bg-slate-50 p-5 shadow-sm transition duration-300 hover:-translate-y-0.5 hover:shadow-lg">
+          <div className="rounded-3xl border border-slate-200/80 bg-slate-50 p-6 shadow-sm transition duration-300 hover:-translate-y-0.5 hover:shadow-lg">
             <span className="inline-flex rounded-full bg-amber-100 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-amber-700">
               Médio
             </span>

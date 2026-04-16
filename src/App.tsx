@@ -8,26 +8,21 @@ import Sidebar from "./components/Sidebar";
 
 function App() {
   return (
-    <div className="flex flex-col h-screen">
+    <div className="min-h-screen bg-slate-100 text-slate-900">
       <Header />
+      <div className="flex min-h-[calc(100vh-96px)]">
+        <Sidebar />
 
-      <div className="flex flex-1">
-        <aside className="flex">
-          <Sidebar />
-        </aside>
-
-        <main className="p-4 flex-1">
-          <InfoCard />
-          <EvoluationCard />
-          <div className="flex gap-5">
-            <div style={{ flex: 1 }}>
+        <main className="flex flex-1 justify-center">
+          <div className="w-full max-w-[1600px] space-y-6 px-4 pb-6 pt-6 xl:px-6">
+            <InfoCard />
+            <EvoluationCard />
+            <div className="grid gap-6 xl:grid-cols-2">
               <BrokerWalletsCard />
-            </div>
-            <div style={{ flex: 1 }}>
               <PatrimonyBrokerCard />
             </div>
+            <MovementsListCard />
           </div>
-          <MovementsListCard />
         </main>
       </div>
     </div>
