@@ -13,6 +13,15 @@ type EvolutionChartState = {
 
 const EvoluationCard = () => {
   const [chartData, setChartData] = useState<EvolutionChartState | null>(null);
+  const [chartHeight, setChartHeight] = useState(380);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width:639px)");
+    const apply = () => setChartHeight(mq.matches ? 260 : 380);
+    apply();
+    mq.addEventListener("change", apply);
+    return () => mq.removeEventListener("change", apply);
+  }, []);
 
   useEffect(() => {
     const mockData = [
@@ -102,14 +111,14 @@ const EvoluationCard = () => {
           <img src={TooltipIcon} alt="tooltip" className="w-4" />
         </Tooltip>
       }
-      className="min-h-[460px]"
+      className="min-h-[340px] sm:min-h-[460px]"
     >
-      <div className="mt-2 h-[380px] w-full">
+      <div className="mt-2 w-full" style={{ height: chartHeight }}>
         <Chart
           options={chartData.options}
           series={chartData.series}
           type="area"
-          height={380}
+          height={chartHeight}
         />
       </div>
     </CardShell>

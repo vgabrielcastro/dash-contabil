@@ -112,7 +112,8 @@ const ListCard = ({ search }: ListCardProps) => {
             sx={{
               borderRadius: 4,
               boxShadow: "0 20px 50px rgba(15,23,42,0.08)",
-              overflow: "hidden",
+              overflowX: "auto",
+              overflowY: "hidden",
             }}
           >
             <Table sx={{ minWidth: 700 }} aria-label="customized table">
@@ -162,6 +163,14 @@ const ListCard = ({ search }: ListCardProps) => {
               onChange={handleChangePage}
               color="primary"
               shape="rounded"
+              size="small"
+              siblingCount={0}
+              boundaryCount={1}
+              sx={{
+                flexWrap: "wrap",
+                justifyContent: "center",
+                "& .MuiPagination-ul": { flexWrap: "wrap", justifyContent: "center", gap: 0.5 },
+              }}
             />
           </div>
         </>

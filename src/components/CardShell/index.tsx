@@ -11,7 +11,7 @@ interface CardShellProps {
 const CardShell = ({ title, subtitle, action, children, className = "" }: CardShellProps) => {
   return (
     <div className={`mt-3 overflow-hidden rounded-3xl border border-slate-200/70 bg-white/95 shadow-[0_20px_50px_rgba(15,23,42,0.08)] transition-all duration-300 hover:shadow-[0_25px_80px_rgba(15,23,42,0.14)] ${className}`}>
-      <div className="flex flex-col gap-5 p-6 sm:p-7">
+      <div className="flex flex-col gap-4 p-4 sm:gap-5 sm:p-6 md:p-7">
         {(title || subtitle || action) && (
           <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
             <div className="min-w-0">

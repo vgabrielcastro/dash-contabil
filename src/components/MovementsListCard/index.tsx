@@ -17,6 +17,8 @@ const MovementsListCard = () => {
       subtitle="Últimas operações do portfólio"
       action={
         <TextField
+          className="w-full min-w-0 max-w-full sm:max-w-[280px]"
+          fullWidth
           type="search"
           variant="outlined"
           size="small"

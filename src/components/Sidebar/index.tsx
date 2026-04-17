@@ -1,3 +1,5 @@
+import CloseIcon from "@mui/icons-material/Close";
+import { IconButton } from "@mui/material";
 import { useState } from "react";
 import AdjustmentsIcon from "../../assets/adjustments.svg";
 import CogIcon from "../../assets/cog.svg";
@@ -11,12 +13,35 @@ import ArrowDownIcon from "../ArrowDown";
 import BadgesNumber from "../BadgesNumber";
 import Divider from "../Divider";
 
-function Sidebar() {
+export type SidebarProps = {
+  mobileOpen: boolean;
+  onMobileClose: () => void;
+};
+
+function Sidebar({ mobileOpen, onMobileClose }: SidebarProps) {
   const [showReports, setShowReports] = useState(false);
   const [showAdvisor, setShowAdvisor] = useState(false);
 
+  const panelClass =
+    "flex max-h-screen w-[min(280px,calc(100vw-1rem))] flex-col gap-5 overflow-y-auto bg-white pb-[max(1.25rem,env(safe-area-inset-bottom))] pl-[max(1.25rem,env(safe-area-inset-left))] pr-[max(1.25rem,env(safe-area-inset-right))] pt-[max(0.75rem,env(safe-area-inset-top))] text-slate-900 shadow-[0_20px_50px_rgba(15,23,42,0.12)] " +
+    "fixed inset-y-0 left-0 z-50 transition-transform duration-300 ease-out " +
+    (mobileOpen ? "translate-x-0" : "-translate-x-full") +
+    " lg:static lg:z-auto lg:h-auto lg:max-h-none lg:w-[280px] lg:shrink-0 lg:translate-x-0 lg:gap-6 lg:overflow-visible lg:p-5 lg:shadow-[0_20px_50px_rgba(15,23,42,0.12)]";
+
   return (
-    <aside className="flex w-[280px] flex-col gap-6 bg-white p-5 text-slate-900 shadow-[0_20px_50px_rgba(15,23,42,0.12)]">
+    <aside className={panelClass} role="navigation" aria-label="Menu principal">
+      <div className="sticky top-0 z-10 mb-1 flex justify-end bg-white lg:hidden">
+        <IconButton
+          type="button"
+          aria-label="Fechar menu"
+          onClick={onMobileClose}
+          className="text-slate-600"
+          size="small"
+        >
+          <CloseIcon />
+        </IconButton>
+      </div>
+
       <div className="flex items-center justify-between gap-3 rounded-3xl border border-slate-200 bg-slate-50 px-4 py-4 shadow-sm">
         <div className="flex items-center gap-3">
           <img src={DashIcon} alt="Dashboard" className="h-10 w-10 rounded-3xl bg-sky-100 p-2" />
@@ -66,10 +91,18 @@ function Sidebar() {
         </button>
         {showReports && (
           <div className="space-y-2 rounded-3xl border border-slate-200 bg-slate-50 p-3 text-sm text-slate-700">
-            <button className="w-full rounded-2xl px-3 py-2 text-left transition hover:bg-slate-100">
+            <button
+              type="button"
+              className="w-full rounded-2xl px-3 py-2 text-left transition hover:bg-slate-100"
+              onClick={onMobileClose}
+            >
               Visão geral
             </button>
-            <button className="w-full rounded-2xl px-3 py-2 text-left transition hover:bg-slate-100">
+            <button
+              type="button"
+              className="w-full rounded-2xl px-3 py-2 text-left transition hover:bg-slate-100"
+              onClick={onMobileClose}
+            >
               Análises
             </button>
           </div>
@@ -88,13 +121,25 @@ function Sidebar() {
         </button>
         {showAdvisor && (
           <div className="space-y-2 rounded-3xl border border-slate-200 bg-slate-50 p-3 text-sm text-slate-700">
-            <button className="w-full rounded-2xl px-3 py-2 text-left transition hover:bg-slate-100">
+            <button
+              type="button"
+              className="w-full rounded-2xl px-3 py-2 text-left transition hover:bg-slate-100"
+              onClick={onMobileClose}
+            >
               Lista de clientes
             </button>
-            <button className="w-full rounded-2xl px-3 py-2 text-left transition hover:bg-slate-100">
+            <button
+              type="button"
+              className="w-full rounded-2xl px-3 py-2 text-left transition hover:bg-slate-100"
+              onClick={onMobileClose}
+            >
               Cobrança
             </button>
-            <button className="w-full rounded-2xl px-3 py-2 text-left transition hover:bg-slate-100">
+            <button
+              type="button"
+              className="w-full rounded-2xl px-3 py-2 text-left transition hover:bg-slate-100"
+              onClick={onMobileClose}
+            >
               Estatísticas
             </button>
           </div>
@@ -103,6 +148,7 @@ function Sidebar() {
         <button
           type="button"
           className="flex w-full items-center justify-between rounded-3xl border border-slate-200 bg-slate-50 px-4 py-3 text-left text-sm font-medium text-slate-900 transition hover:bg-slate-100"
+          onClick={onMobileClose}
         >
           <div className="flex items-center gap-3">
             <img src={InboxIcon} alt="Mensagens" className="h-5 w-5" />
@@ -119,10 +165,14 @@ function Sidebar() {
         <p className="mt-2 text-sm leading-6 text-slate-600">
           Encontre artigos, tutoriais e suporte rápido para acompanhar suas finanças.
         </p>
-        <div className="mt-4 flex items-center gap-3">
-          <img src={SupportIcon} alt="Ajuda" className="h-5 w-5" />
+        <button
+          type="button"
+          className="mt-4 flex w-full items-center gap-3 rounded-2xl px-1 py-2 text-left transition hover:bg-slate-100"
+          onClick={onMobileClose}
+        >
+          <img src={SupportIcon} alt="" aria-hidden className="h-5 w-5" />
           <span className="text-sm font-medium text-slate-900">Central de Suporte</span>
-        </div>
+        </button>
       </div>
 
       <div className="mt-auto flex items-center justify-between gap-4 rounded-3xl border border-slate-200 bg-slate-50 p-4 shadow-sm">
