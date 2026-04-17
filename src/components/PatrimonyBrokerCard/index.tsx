@@ -26,7 +26,7 @@ const PatrimonyBrokerCard = () => {
         tickAmount: 6,
         labels: {
           formatter: function (val: number) {
-            return val;
+            return String(val);
           },
           style: {
             colors: "#475569",

@@ -1,3 +1,4 @@
+import type { ApexOptions } from "apexcharts";
 import { CircularProgress, Tooltip } from "@mui/material";
 import { format } from "date-fns";
 import { useEffect, useState } from "react";
@@ -5,8 +6,13 @@ import Chart from "react-apexcharts";
 import TooltipIcon from "../../assets/tooltip-icon.svg";
 import CardShell from "../CardShell";
 
+type EvolutionChartState = {
+  options: ApexOptions;
+  series: NonNullable<ApexOptions["series"]>;
+};
+
 const EvoluationCard = () => {
-  const [chartData, setChartData] = useState(null);
+  const [chartData, setChartData] = useState<EvolutionChartState | null>(null);
 
   useEffect(() => {
     const mockData = [
@@ -57,7 +63,7 @@ const EvoluationCard = () => {
           max: Math.max(...seriesData) + 50000,
           tickAmount: 5,
           labels: {
-            formatter: (val) =>
+            formatter: (val: number) =>
               `R$ ${Math.round(val / 1000).toLocaleString()}k`,
             style: {
               colors: "#475569",
