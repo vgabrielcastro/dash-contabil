@@ -58,7 +58,7 @@ const generateFakeData = () => {
       date: new Date(
         2024,
         Math.floor(Math.random() * 12),
-        Math.floor(Math.random() * 28) + 1
+        Math.floor(Math.random() * 28) + 1,
       ),
       value: (Math.random() * 1000).toFixed(2),
       type: transactionTypes[
@@ -79,7 +79,7 @@ const ListCard = ({ search }: ListCardProps) => {
 
   const getFilteredItems = () => {
     const filteredItems = fakeData.filter((transaction) =>
-      transaction.clientName.toLowerCase().includes(search?.toLowerCase())
+      transaction.clientName.toLowerCase().includes(search?.toLowerCase()),
     );
 
     const startIndex = (page - 1) * itemsPerPage;
@@ -90,8 +90,8 @@ const ListCard = ({ search }: ListCardProps) => {
   const totalPages = Math.max(1, Math.ceil(fakeData.length / itemsPerPage));
 
   const handleChangePage = (
-    _event: React.MouseEvent<HTMLButtonElement> | null,
-    newPage: number
+    _event: React.ChangeEvent<unknown>,
+    newPage: number,
   ) => {
     setPage(newPage);
   };
@@ -132,11 +132,15 @@ const ListCard = ({ search }: ListCardProps) => {
                       {format(
                         new Date(transaction.date),
                         "dd 'de' MMMM 'de' yyyy",
-                        { locale: ptBR }
+                        { locale: ptBR },
                       )}
                     </StyledTableCell>
                     <StyledTableCell>
-                      R$ {Number(transaction.value).toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                      R${" "}
+                      {Number(transaction.value).toLocaleString("pt-BR", {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2,
+                      })}
                     </StyledTableCell>
                     <StyledTableCell>
                       <Badges

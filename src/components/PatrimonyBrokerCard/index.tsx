@@ -7,7 +7,7 @@ const PatrimonyBrokerCard = () => {
   const chartOptions = {
     options: {
       chart: {
-        type: "bar",
+        type: "bar" as const,
         height: 350,
         toolbar: {
           show: false,
@@ -25,7 +25,7 @@ const PatrimonyBrokerCard = () => {
       yaxis: {
         tickAmount: 6,
         labels: {
-          formatter: function (val) {
+          formatter: function (val: number) {
             return val;
           },
           style: {

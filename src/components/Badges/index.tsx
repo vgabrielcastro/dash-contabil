@@ -28,7 +28,7 @@ const Badges = ({ text, color }: BadgesProps) => {
     },
   });
 
-  const textColor = theme.palette[color].text;
+  const textColor = theme.palette[color].contrastText;
 
   return (
     <ThemeProvider theme={theme}>

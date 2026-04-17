@@ -18,7 +18,7 @@ const EvoluationCard = () => {
     ];
 
     const categories = mockData.map((item) =>
-      format(new Date(item.date), "dd MMM")
+      format(new Date(item.date), "dd MMM"),
     );
     const seriesData = mockData.map((item) => item.value);
 
@@ -57,7 +57,8 @@ const EvoluationCard = () => {
           max: Math.max(...seriesData) + 50000,
           tickAmount: 5,
           labels: {
-            formatter: (val) => `R$ ${Math.round(val / 1000).toLocaleString()}k`,
+            formatter: (val) =>
+              `R$ ${Math.round(val / 1000).toLocaleString()}k`,
             style: {
               colors: "#475569",
             },
@@ -71,9 +72,7 @@ const EvoluationCard = () => {
           theme: "light",
         },
       },
-      series: [
-        { name: "Evolução de patrimônio", data: seriesData },
-      ],
+      series: [{ name: "Evolução de patrimônio", data: seriesData }],
     });
   }, []);
 
